@@ -5,28 +5,40 @@ import NextLink, { LinkProps } from "next/link";
 type Props = {
   isActive: boolean;
   text: string;
-  Icon: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
+  size?: "small" | "medium" | "large";
+  px?: number;
+  textColor?: string;
+  Icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
     muiName: string;
   };
+  iconSize?: "small" | "medium" | "large";
   closeMenu?: () => void;
 } & LinkProps;
 
-let noActiveStyle = {
-  textDecoration: "none",
-};
-
-function MyLinkButton({ isActive, href, text, Icon, closeMenu }: Props) {
-  return isActive ? (
-    <></>
-  ) : (
+function MyLinkButton({
+  size = "medium",
+  isActive,
+  href,
+  px,
+  text,
+  textColor = "primary.contrastText",
+  Icon,
+  closeMenu,
+}: Props) {
+  return (
     <NextLink href={href} passHref>
       <MUILink
+        px={px && px}
+        size={size}
         component={Button}
-        size="large"
-        startIcon={<Icon fontSize="large" />}
+        startIcon={Icon && <Icon />}
         onClick={closeMenu}
-        style={noActiveStyle}
-        sx={{ fontWeight: "inherit", color: "primary" }}
+        disabled={isActive}
+        sx={{
+          color: textColor,
+          textDecoration: "none",
+          justifyContent: "flex-start",
+        }}
       >
         {text}
       </MUILink>
