@@ -11,7 +11,6 @@ export default class MyDocument extends Document {
       <Html lang="pl">
         <Head>
           {/* PWA primary color */}
-
           <link rel="shortcut icon" href="/favicon.ico" />
           <meta name="emotion-insertion-point" content="" />
           {(this.props as any).emotionStyleTags}
