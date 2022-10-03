@@ -1,4 +1,4 @@
-import { Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
 import type { NextPage } from "next";
 import Head from "next/head";
 
@@ -6,20 +6,31 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Strona główna</title>
-        <meta name="description" content="Strona główna. Morsujity" />
+        <title>Morsujity</title>
+        <meta
+          name="description"
+          content="Witamj w Morsujity!
+                    Morsuj dołączaj do grup.
+                    Zdobywaj kolejne rangi!."
+        />
         <link rel="canonical" href="/" />
       </Head>
       <Stack
         sx={{
-          mx: { xs: 1, sm: 10, md: 20, lg: 30, xl: 40 },
           my: { xs: 1, sm: 1.5, lg: 2 },
         }}
         justifyContent="center"
         alignItems="center"
         spacing={{ xs: 1, sm: 1.5, lg: 2 }}
       >
-        <Typography>START</Typography>
+        <Box mt={5} textAlign="center">
+          <Typography variant="h1">Morsuj i Ty</Typography>
+          <Typography mt={10} mb={5} variant="h5">
+            Witamj w Morsujity! <br />
+            Morsuj dołączaj do grup. <br />
+            Zdobywaj kolejne rangi!
+          </Typography>
+        </Box>
       </Stack>
     </>
   );
