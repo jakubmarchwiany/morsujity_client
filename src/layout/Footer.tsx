@@ -9,7 +9,7 @@ function Footer() {
       justifyContent="space-around"
       alignItems={"center"}
     >
-      <Typography sx={{ color: "secondary.main" }}>
+      <Typography sx={{ color: "primary.contrastText" }}>
         Chełmscy emeryci {new Date().getFullYear()}
       </Typography>
       <Box>
@@ -18,14 +18,14 @@ function Footer() {
           size={"small"}
           href="/statut"
           text="Statut"
-          textColor="white"
+          textColor="primary.contrastText"
         />
         <MyLinkButton
           isActive={false}
           size={"small"}
           href="/contact"
           text="Kontakt"
-          textColor="white"
+          textColor="primary.contrastText"
         />
       </Box>
     </Stack>

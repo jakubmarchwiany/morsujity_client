@@ -3,7 +3,7 @@ import { OverridableComponent } from "@mui/material/OverridableComponent";
 import NextLink, { LinkProps } from "next/link";
 
 type Props = {
-  isActive: boolean;
+  isActive?: boolean;
   text: string;
   size?: "small" | "medium" | "large";
   px?: number;
@@ -17,11 +17,11 @@ type Props = {
 
 function MyLinkButton({
   size = "medium",
-  isActive,
+  isActive = false,
   href,
   px,
   text,
-  textColor = "primary.contrastText",
+  textColor = "secondary.contrastText",
   Icon,
   closeMenu,
 }: Props) {
