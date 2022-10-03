@@ -9,11 +9,8 @@ const NotFound: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Brak strony</title>
-        <meta
-          name="description"
-          content="Strona o podanym adresie nie istnieje"
-        />
+        <title>Strona nie znaleziona</title>
+        <meta name="description" content="Strona nie znaleziona." />
       </Head>
       <Box mt={15} textAlign="center">
         <Typography variant="h4">Ta strona jest niedostępna</Typography>
