@@ -46,7 +46,7 @@ export default function MyApp(props: MyAppProps) {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Stack height="100vh" display="flex" flexDirection="column">
-          <Navbar mode={mode} switchMode={setMode} />
+          <Navbar switchMode={setMode} />
           <Grid2
             container
             flex={1}
@@ -56,12 +56,8 @@ export default function MyApp(props: MyAppProps) {
             color={"text.primary"}
           >
             {isBigScreen && (
-              <Grid2
-                md={4}
-                lg={3}
-                sx={{ display: { xs: "none", md: "block" }, pt: 2 }}
-              >
-                <Navigator mode={mode} switchMode={setMode} />
+              <Grid2 md={4} lg={3} pt={2}>
+                <Navigator />
               </Grid2>
             )}
 

@@ -1,3 +1,4 @@
+import { DarkMode, LightMode } from "@mui/icons-material";
 import AcUnitIcon from "@mui/icons-material/AcUnit";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
@@ -7,7 +8,7 @@ import {
   Theme,
   Tooltip,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -19,11 +20,10 @@ import { memo, useState } from "react";
 import Navigator from "./Navigator";
 
 interface NavbarProps {
-  mode: PaletteMode;
   switchMode: () => void;
 }
 
-function Navbar({ mode, switchMode }: NavbarProps) {
+function Navbar({ switchMode }: NavbarProps) {
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const open = Boolean(anchorEl);
 
@@ -66,44 +66,44 @@ function Navbar({ mode, switchMode }: NavbarProps) {
             </Typography>
           </Link>
         </Stack>
-
-        {isSmallScreen && (
-          <Box>
-            <Tooltip title="Nawigator">
-              <IconButton
-                id="demo-positioned-button"
-                aria-expanded={open ? "true" : undefined}
-                aria-controls={open ? "demo-positioned-menu" : undefined}
-                aria-haspopup="true"
-                onClick={handleClick}
-                sx={{ color: "white" }}
+        <Box>
+          <IconButton sx={{ ml: 1 }} onClick={switchMode} color="inherit">
+            {theme.palette.mode === "dark" ? <DarkMode /> : <LightMode />}
+          </IconButton>
+          {isSmallScreen && (
+            <>
+              <Tooltip title="Nawigator">
+                <IconButton
+                  id="demo-positioned-button"
+                  aria-expanded={open ? "true" : undefined}
+                  aria-controls={open ? "demo-positioned-menu" : undefined}
+                  aria-haspopup="true"
+                  onClick={handleClick}
+                  sx={{ color: "white" }}
+                >
+                  <MenuIcon />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                id="demo-positioned-menu"
+                aria-labelledby="demo-positioned-button"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleCloseMenu}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
               >
-                <MenuIcon />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              id="demo-positioned-menu"
-              aria-labelledby="demo-positioned-button"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleCloseMenu}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-            >
-              <Navigator
-                mode={mode}
-                switchMode={switchMode}
-                closeMenu={handleCloseMenu}
-              />
-            </Menu>
-          </Box>
-        )}
+                <Navigator closeMenu={handleCloseMenu} />
+              </Menu>
+            </>
+          )}
+        </Box>
       </Toolbar>
     </AppBar>
   );

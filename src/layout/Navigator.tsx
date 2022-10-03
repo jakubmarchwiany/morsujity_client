@@ -1,29 +1,24 @@
 import {
   Book,
-  DarkMode,
   ExpandLess,
   ExpandMore,
   GroupAdd,
   HowToReg,
-  LightMode,
   Login,
   Storefront,
-  Web
+  Web,
 } from "@mui/icons-material";
-import { Button, Collapse, PaletteMode, Stack, Switch } from "@mui/material";
+import { Button, Collapse, Stack } from "@mui/material";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import MyLinkButton from "../components/my/MyLinkButton";
 
 interface NavigatorProps {
-  mode: PaletteMode;
-  switchMode: () => void;
   closeMenu?: () => void;
 }
 
-const Navigator = ({ mode, switchMode, closeMenu }: NavigatorProps) => {
+const Navigator = ({ closeMenu }: NavigatorProps) => {
   const [open, setOpen] = useState(true);
-
   const router = useRouter();
 
   return (
@@ -65,7 +60,7 @@ const Navigator = ({ mode, switchMode, closeMenu }: NavigatorProps) => {
         sx={{
           pl: 2,
           justifyContent: "flex-start",
-          color: "primary.contrastText",
+          color: "secondary.contrastText",
         }}
       >
         Blog
@@ -74,22 +69,22 @@ const Navigator = ({ mode, switchMode, closeMenu }: NavigatorProps) => {
         <Stack pl={2}>
           <MyLinkButton
             px={2}
-            isActive={router.pathname === "/blog"}
-            href="/blog"
+            isActive={router.pathname === "/blog/1"}
+            href="/blog/1"
             closeMenu={closeMenu}
             text="O Aplikacja"
           />
           <MyLinkButton
             px={2}
             isActive={router.pathname === "/blog/2"}
-            href="/blog"
+            href="/blog/2"
             closeMenu={closeMenu}
             text="+ / - Morsowania"
           />
           <MyLinkButton
             px={2}
             isActive={router.pathname === "/blog/3"}
-            href="/blog"
+            href="/blog/3"
             closeMenu={closeMenu}
             text="Morsowanie ?"
           />
@@ -98,7 +93,7 @@ const Navigator = ({ mode, switchMode, closeMenu }: NavigatorProps) => {
       <MyLinkButton
         px={2}
         size="large"
-        isActive={router.pathname === "/blog/3"}
+        isActive={router.pathname === "/search"}
         href="/search"
         closeMenu={closeMenu}
         text="Szukaj Grupy"
@@ -113,18 +108,6 @@ const Navigator = ({ mode, switchMode, closeMenu }: NavigatorProps) => {
         text="Sklep"
         Icon={Storefront}
       />
-      <Stack direction={"row"} justifyContent={"center"} mt={1}>
-        {mode === "dark" ? (
-          <DarkMode fontSize="large" />
-        ) : (
-          <LightMode fontSize="large" sx={{ color: "primary.main" }} />
-        )}
-
-        <Switch
-          checked={mode === "dark" ? true : false}
-          onChange={() => switchMode()}
-        />
-      </Stack>
     </Stack>
   );
 };
