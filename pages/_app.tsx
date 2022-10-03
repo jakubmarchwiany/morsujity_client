@@ -28,7 +28,6 @@ interface MyAppProps extends AppProps {
 
 export default function MyApp(props: MyAppProps) {
   const [mode, setMode] = useSetMode();
-
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
   const theme = useMemo(
@@ -61,16 +60,12 @@ export default function MyApp(props: MyAppProps) {
               </Grid2>
             )}
 
-            <Grid2 xs={20} md={12} lg={14} bgcolor={"background.paper"}>
+            <Grid2 xs={20} md={12} lg={14} bgcolor={"background.paper"} pt={3}>
               <Component {...pageProps} />
             </Grid2>
 
             {isBigScreen && (
-              <Grid2
-                md={4}
-                lg={3}
-                sx={{ display: { xs: "none", md: "block" } }}
-              >
+              <Grid2 md={4} lg={3}>
                 <Ads />
               </Grid2>
             )}
