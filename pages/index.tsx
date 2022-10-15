@@ -1,8 +1,31 @@
 import { Box, Stack, Typography } from "@mui/material";
+import cookie from "js-cookie";
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useEffect } from "react";
+import { getFetch } from "../src/utils/fetches";
+
+const ENV = process.env.NEXT_PUBLIC_ENV;
+const DEV_API_ENDPOINT = process.env.NEXT_PUBLIC_DEV_API_ENDPOINT;
 
 const Home: NextPage = () => {
+  useEffect(() => {
+    if (cookie.get("Authorization") !== undefined) {
+      const END_POINT =
+        ENV === "development"
+          ? DEV_API_ENDPOINT
+          : window.location.origin + "/api";
+      getFetch<{ message: string }>(END_POINT + "/auth/auto-login")
+        .then(({ message }) => {
+          console.log(message);
+          window.location.href = "/user/home";
+        })
+        .catch(({ message }) => {
+          console.log(message);
+        });
+    }
+  }, []);
+
   return (
     <>
       <Head>
