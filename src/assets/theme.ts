@@ -16,62 +16,62 @@ import type { PaletteMode } from "@mui/material";
 // }
 
 export const getDesignTokens = (mode: PaletteMode) => ({
-  palette: {
-    mode,
-    ...(mode === "light"
-      ? {
-          // palette values for light mode
-          primary: {
-            main: "#468faf",
-            contrastText: "#fff",
-          },
-          secondary: {
-            main: "#fff",
-            contrastText: "#468faf",
-          },
-          background: {
-            default: "#fff",
-            paper: "#fafafa",
-          },
-          divider: "#D3D3D3",
-          text: {
-            primary: "#000",
-            secondary: "#468faf",
-          },
-        }
-      : {
-          // palette values for dark mode
-          primary: {
-            main: "#2c5a69",
-            contrastText: "#fff",
-          },
-          secondary: {
-            main: "#fff",
-            contrastText: "#fff",
-          },
-          background: {
-            default: "#303030",
-            paper: "#424242",
-          },
-          divider: "#D3D3D3",
-          text: {
-            primary: "#fff",
-            secondary: "#fff",
-          },
-        }),
-  },
-  typography: {
-    fontFamily: ["Montserrat", "sans-serif"].join(","),
-  },
-  breakpoints: {
-    values: {
-      xs: 0,
-      sm: 769,
-      md: 1024,
-      lg: 1216,
-      xl: 1408,
+    palette: {
+        mode,
+        ...(mode === "light"
+            ? {
+                  // palette values for light mode
+                  primary: {
+                      main: "#468faf",
+                      contrastText: "#fff",
+                  },
+                  secondary: {
+                      main: "#fff",
+                      contrastText: "#468faf",
+                  },
+                  background: {
+                      default: "#fff",
+                      paper: "#fafafa",
+                  },
+                  divider: "#D3D3D3",
+                  text: {
+                      primary: "#000",
+                      secondary: "#468faf",
+                  },
+              }
+            : {
+                  // palette values for dark mode
+                  primary: {
+                      main: "#2c5a69",
+                      contrastText: "#fff",
+                  },
+                  secondary: {
+                      main: "#fff",
+                      contrastText: "#fff",
+                  },
+                  background: {
+                      default: "#303030",
+                      paper: "#424242",
+                  },
+                  divider: "#D3D3D3",
+                  text: {
+                      primary: "#fff",
+                      secondary: "#fff",
+                  },
+              }),
     },
-  },
+    typography: {
+        fontFamily: ["Montserrat", "sans-serif"].join(","),
+    },
+    breakpoints: {
+        values: {
+            xs: 0,
+            sm: 769,
+            md: 1024,
+            lg: 1216,
+            xl: 1408,
+        },
+    },
 });
 
 //Light mode
