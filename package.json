@@ -1,22 +1,31 @@
 {
-  "name": "morsujity-frontend-ssr",
-  "version": "0.1.0",
-  "private": true,
+  "name": "morsujity-client",
+  "version": "0.5.0",
+  "description": "Morsujity Client",
+  "homepage": "https://github.com/xkvbikx/morsujity-client",
+  "license": "GPL-3.0-or-later",
+  "author": {
+    "name": "Jakub Marchwiany",
+    "email": "jacobmarchwiany@gmail.com"
+  },
+  "engines": {
+    "node": "~16.15.1",
+    "npm": "~8.19.2"
+  },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "build": "rimraf ./build && next build",
+    "start": "next start -p 8080"
   },
   "dependencies": {
-    "@emotion/cache": "latest",
-    "@emotion/react": "latest",
-    "@emotion/server": "latest",
-    "@emotion/styled": "latest",
+    "@emotion/cache": "^11.10.3",
+    "@emotion/react": "^11.10.4",
+    "@emotion/server": "^11.10.0",
+    "@emotion/styled": "^11.10.4",
     "@fontsource/montserrat": "^4.5.12",
-    "@mui/icons-material": "latest",
+    "@mui/icons-material": "^5.10.6",
     "@mui/lab": "^5.0.0-alpha.101",
-    "@mui/material": "latest",
+    "@mui/material": "^5.10.8",
     "envalid": "^7.3.1",
     "formik": "^2.2.9",
     "html-react-parser": "^3.0.4",
@@ -27,6 +36,7 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "rimraf": "^3.0.2",
     "@types/js-cookie": "^3.0.2",
     "@types/node": "18.7.19",
     "@types/react": "18.0.21",
