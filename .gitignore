@@ -37,3 +37,8 @@ client.yaml
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.env*
+.flaskenv*
+!.env.project
+!.env.vault
