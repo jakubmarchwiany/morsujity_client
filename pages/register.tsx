@@ -162,7 +162,7 @@ const Register: NextPage = () => {
                             Rejestruj
                         </LoadingButton>
 
-                        <MyLinkButton text="Masz już konto?" href="/login" size="small"   />
+                        <MyLinkButton text="Masz już konto?" href="/login" size="small" fullWidth={false} />
                     </Box>
                 </Box>
             </Container>

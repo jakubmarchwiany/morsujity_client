@@ -118,6 +118,7 @@ const Login: NextPage = () => {
                             href="/auth/reset-password"
                             isActive={false}
                             size="small"
+                            fullWidth={false}
                         />
                         <LoadingButton
                             loading={loading}
@@ -134,6 +135,7 @@ const Login: NextPage = () => {
                             href="/register"
                             isActive={false}
                             size="small"
+                            fullWidth={false}
                         />
                     </Box>
                 </Box>
