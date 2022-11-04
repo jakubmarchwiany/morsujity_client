@@ -1,53 +1,48 @@
 {
-  "name": "morsujity-client",
-  "version": "0.5.0",
-  "description": "Morsujity Client",
-  "homepage": "https://github.com/xkvbikx/morsujity-client",
-  "license": "GPL-3.0-or-later",
-  "author": {
-    "name": "Jakub Marchwiany",
-    "email": "jacobmarchwiany@gmail.com"
-  },
-  "engines": {
-    "node": "~16.15.1",
-    "yarn": "~3.2.4"
-  },
-  "scripts": {
-    "dev": "next dev",
-    "build": "rimraf ./build && next build",
-    "start": "next start -p 8080",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@emotion/cache": "^11.10.3",
-    "@emotion/react": "^11.10.4",
-    "@emotion/server": "^11.10.0",
-    "@emotion/styled": "^11.10.4",
-    "@mui/icons-material": "^5.10.6",
-    "@mui/lab": "^5.0.0-alpha.101",
-    "@mui/material": "^5.10.8",
-    "@mui/system": "^5.10.12",
-    "envalid": "^7.3.1",
-    "formik": "^2.2.9",
-    "html-react-parser": "^3.0.4",
-    "js-cookie": "^3.0.1",
-    "next": "^13.0.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "yup": "^0.32.11"
-  },
-  "devDependencies": {
-    "@types/js-cookie": "^3.0.2",
-    "@types/node": "18.11.9",
-    "@types/react": "18.0.24",
-    "eslint": "^8.26.0",
-    "eslint-config-airbnb": "latest",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsx-a11y": "^6.6.1",
-    "eslint-plugin-react": "^7.31.10",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "rimraf": "^3.0.2",
-    "typescript": "4.8.4"
-  },
-  "packageManager": "yarn@3.2.4"
+    "name": "morsujity-client",
+    "version": "0.5.0",
+    "description": "Morsujity Client",
+    "homepage": "https://github.com/xkvbikx/morsujity-client",
+    "license": "GPL-3.0-or-later",
+    "author": {
+        "name": "Jakub Marchwiany",
+        "email": "jacobmarchwiany@gmail.com"
+    },
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "gcp-build": "next build",
+        "start": "next start -p 8080",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "@emotion/cache": "^11.10.3",
+        "@emotion/react": "^11.10.4",
+        "@emotion/server": "^11.10.0",
+        "@emotion/styled": "^11.10.4",
+        "@mui/icons-material": "^5.10.6",
+        "@mui/lab": "^5.0.0-alpha.101",
+        "@mui/material": "^5.10.8",
+        "@mui/system": "^5.10.12",
+        "envalid": "^7.3.1",
+        "formik": "^2.2.9",
+        "html-react-parser": "^3.0.4",
+        "js-cookie": "^3.0.1",
+        "next": "^13.0.2",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "yup": "^0.32.11"
+    },
+    "devDependencies": {
+        "@types/js-cookie": "^3.0.2",
+        "@types/node": "18.11.9",
+        "@types/react": "18.0.24",
+        "eslint": "^8.26.0",
+        "eslint-config-airbnb": "latest",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-jsx-a11y": "^6.6.1",
+        "eslint-plugin-react": "^7.31.10",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "typescript": "4.8.4"
+    }
 }

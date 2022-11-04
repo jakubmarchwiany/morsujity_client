@@ -48,14 +48,15 @@ build/Release
 
 # Optional npm cache directory
 .npm
+node_modules
 
 # Optional REPL history
 .node_repl_history
 build
 
 # yarn
+.pnp.*
 .yarn/*
-!.yarn/cache
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases

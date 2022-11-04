@@ -12,7 +12,6 @@ import { useState } from "react";
 import { postFetch } from "utils/fetches";
 import * as Yup from "yup";
 
-const ENV = process.env.NEXT_PUBLIC_ENV;
 const DEV_API_ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT;
 
 const INITIAL_FORM_STATE = {

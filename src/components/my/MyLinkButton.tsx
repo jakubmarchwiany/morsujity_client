@@ -8,7 +8,7 @@ type Props = {
     isActive?: boolean;
     size?: "small" | "medium" | "large";
     textColor?: string;
-    Icon?: OverridableComponent<SvgIconTypeMap<{}, "svg">> & {
+    Icon?: OverridableComponent<SvgIconTypeMap<unknown, "svg">> & {
         muiName: string;
     };
     fullWidth?: boolean;
@@ -40,5 +40,4 @@ function MyLinkButton({
         </Link>
     );
 }
-
 export default MyLinkButton;

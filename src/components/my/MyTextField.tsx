@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { TextFieldProps } from "@mui/material";
 import { TextField } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -76,5 +77,4 @@ const MyTextField = ({
         helperText={formik && formik.touched[name] && formik.errors[name]}
     />
 );
-
 export default MyTextField;
