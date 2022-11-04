@@ -9,7 +9,7 @@ import Menu from "@mui/material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Link from "next/link";
 import { memo, useState } from "react";
-import Navigator from "./Navigator";
+import Navigator from "layout/Navigator";
 
 interface NavbarProps {
     switchMode: () => void;

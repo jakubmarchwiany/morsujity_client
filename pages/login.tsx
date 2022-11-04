@@ -1,16 +1,15 @@
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { Avatar, Box, Container, Typography } from "@mui/material";
+import MyLinkButton from "components/my/MyLinkButton";
+import MyTextField from "components/my/MyTextField";
 import Cookies from "js-cookie";
+import Notification, { NotificationProps } from "layout/Notification";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import MyLinkButton from "../src/components/my/MyLinkButton";
-import MyTextField from "../src/components/my/MyTextField";
-import Notification, { NotificationProps } from "../src/layout/Notification";
-
-import { postFetch } from "../src/utils/fetches";
+import { postFetch } from "utils/fetches";
 
 const DEV_API_ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT;
 

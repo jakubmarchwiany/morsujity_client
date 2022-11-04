@@ -1,16 +1,16 @@
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { Avatar, Box, Container, Typography } from "@mui/material";
+import MyLinkButton from "components/my/MyLinkButton";
+import MyTextField from "components/my/MyTextField";
 import { useFormik } from "formik";
+import Notification, { NotificationProps } from "layout/Notification";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { postFetch } from "utils/fetches";
 import * as Yup from "yup";
-import MyLinkButton from "../src/components/my/MyLinkButton";
-import MyTextField from "../src/components/my/MyTextField";
-import Notification, { NotificationProps } from "../src/layout/Notification";
-import { postFetch } from "../src/utils/fetches";
 
 const ENV = process.env.NEXT_PUBLIC_ENV;
 const DEV_API_ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT;
@@ -162,7 +162,12 @@ const Register: NextPage = () => {
                             Rejestruj
                         </LoadingButton>
 
-                        <MyLinkButton text="Masz już konto?" href="/login" size="small" fullWidth={false} />
+                        <MyLinkButton
+                            text="Masz już konto?"
+                            href="/login"
+                            size="small"
+                            fullWidth={false}
+                        />
                     </Box>
                 </Box>
             </Container>

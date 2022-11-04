@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { postFetch } from "../../src/utils/fetches";
+import { postFetch } from "utils/fetches";
 
 const DEV_API_ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT;
 

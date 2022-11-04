@@ -1,10 +1,9 @@
 import { Home } from "@mui/icons-material";
 import { Box, Typography } from "@mui/material";
 import { Container } from "@mui/system";
+import MyLinkButton from "components/my/MyLinkButton";
 import { NextPage } from "next";
 import Head from "next/head";
-
-import MyLinkButton from "../src/components/my/MyLinkButton";
 
 const NotFound: NextPage = () => {
     return (

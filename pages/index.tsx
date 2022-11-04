@@ -10,7 +10,7 @@ const Home: NextPage = () => {
                 <title>Morsujity</title>
                 <meta
                     name="description"
-                    content="Witamj w Morsujity!
+                    content="Witaj w Morsujity!
                     Morsuj dołączaj do grup.
                     Zdobywaj kolejne rangi!."
                 />
@@ -25,7 +25,7 @@ const Home: NextPage = () => {
                 <Box textAlign="center">
                     <Typography variant="h1">Morsuj i Ty</Typography>
                     <Typography mt={10} mb={5} variant="h5">
-                        Witamj w Morsujity! <br />
+                        Witaj w Morsujity! <br />
                         Morsuj dołączaj do grup. <br />
                         Zdobywaj kolejne rangi!
                     </Typography>

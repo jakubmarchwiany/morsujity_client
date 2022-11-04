@@ -1,11 +1,11 @@
 import { LockReset } from "@mui/icons-material";
 import { Avatar, Box, Button, Container, Typography } from "@mui/material";
+import MyTextField from "components/my/MyTextField";
 import { useFormik } from "formik";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { postFetch } from "utils/fetches";
 import * as Yup from "yup";
-import MyTextField from "../../src/components/my/MyTextField";
-import { postFetch } from "../../src/utils/fetches";
 
 const DEV_API_ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT;
 

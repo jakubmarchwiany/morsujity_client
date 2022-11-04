@@ -8,19 +8,19 @@ import {
     useMediaQuery,
 } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
+import "assets/styles.css";
+import { getDesignTokens } from "assets/theme";
+import useSetMode from "hooks/use-set-mode";
 import Cookies from "js-cookie";
+import Ads from "layout/Ads";
+import Footer from "layout/Footer";
+import Navbar from "layout/Navbar";
+import Navigator from "layout/Navigator";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useMemo } from "react";
-import "../src/assets/styles.css";
-import { getDesignTokens } from "../src/assets/theme";
-import useSetMode from "../src/hooks/use-set-mode";
-import Ads from "../src/layout/Ads";
-import Footer from "../src/layout/Footer";
-import Navbar from "../src/layout/Navbar";
-import Navigator from "../src/layout/Navigator";
-import createEmotionCache from "../src/utils/createEmotionCache";
+import createEmotionCache from "utils/createEmotionCache";
 
 const DEV_API_ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT;
 

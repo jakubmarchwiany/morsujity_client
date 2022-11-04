@@ -11,7 +11,7 @@ import {
 import { Button, Collapse, Stack } from "@mui/material";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import MyLinkButton from "../components/my/MyLinkButton";
+import MyLinkButton from "components/my/MyLinkButton";
 
 interface NavigatorProps {
     closeMenu?: () => void;
