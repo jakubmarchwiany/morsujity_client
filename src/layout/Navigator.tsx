@@ -6,7 +6,7 @@ import {
     Home,
     HowToReg,
     Login,
-    Storefront
+    Storefront,
 } from "@mui/icons-material";
 import { Button, Collapse, Stack } from "@mui/material";
 import { useRouter } from "next/router";

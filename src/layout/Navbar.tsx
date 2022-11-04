@@ -38,18 +38,19 @@ function Navbar({ switchMode }: NavbarProps) {
                 top: "auto",
             }}
         >
-            <Toolbar sx={{ justifyContent: "space-between", alignContent: "center", py: 1 }}>
+            <Toolbar sx={{ justifyContent: "space-between", alignContent: "center", my: 0 }}>
                 <Stack direction="row" alignItems="center">
                     <AcUnitIcon
                         fontSize="large"
                         sx={{
+                            mr: 2,
                             color: "#fff",
                         }}
                     />
-                    <Link href="/" passHref>
+
+                    <Link href="/user/dashboard" style={{ textDecoration: "none" }}>
                         <MuiLink
-                            mx={2}
-                            href="#"
+                            component="p"
                             variant="h6"
                             underline="hover"
                             sx={{
