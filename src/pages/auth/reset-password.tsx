@@ -1,41 +1,29 @@
 import { LockReset } from "@mui/icons-material";
-import { Avatar, Box, Button, Container, Typography } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import { Avatar, Box, Container, Stack, Typography } from "@mui/material";
 import MyTextField from "components/my/MyTextField";
 import { useFormik } from "formik";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { postFetch } from "utils/fetches";
-import * as Yup from "yup";
-
-const DEV_API_ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT;
-
-const INITIAL_FORM_STATE = {
-    email: "",
-};
-
-const FORM_VALIDATION = Yup.object().shape({
-    email: Yup.string().required("Wymagane").email("Email niepoprawny"),
-});
+import { RESET_PASSWORD_FORM_VALIDATION, RESET_PASSWORD_INITIAL_FORM_STATE } from "utils/formiks";
 
 function ResetPassword() {
+    const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
 
-    const formik = useFormik({
-        initialValues: INITIAL_FORM_STATE,
-        validationSchema: FORM_VALIDATION,
+    const resetPasswordformik = useFormik({
+        initialValues: RESET_PASSWORD_INITIAL_FORM_STATE,
+        validationSchema: RESET_PASSWORD_FORM_VALIDATION,
         onSubmit: ({ email }) => {
-            postFetch<{ message: string }>({ email }, DEV_API_ENDPOINT + `/auth/reset-password`)
-                .then(({ message }) => {
-                    router.push({
-                        pathname: "/login",
-                        query: { open: true, message, type: "success" },
-                    });
+            setIsLoading(true);
+            postFetch<never>({ email }, "/auth/reset-password", { customError: true })
+                .then(() => {
+                    router.push("/login");
                 })
-                .catch((error) => {
-                    router.push({
-                        pathname: "/login",
-                        query: { open: true, message: error.message, type: "error" },
-                    });
+                .catch(() => {
+                    router.push("/login");
                 });
         },
     });
@@ -53,13 +41,7 @@ function ResetPassword() {
                     px: { xs: 5, sm: 30, md: 15, lg: 30, xl: 40 },
                 }}
             >
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                    }}
-                >
+                <Stack alignItems="center">
                     <Avatar
                         sx={{
                             mb: 2,
@@ -72,25 +54,25 @@ function ResetPassword() {
                         <LockReset fontSize="large" />
                     </Avatar>
 
-                    <Typography component="h1" variant="h4">
+                    <Typography component="h1" variant="h4" mb={1}>
                         Resetowanie Hasła
                     </Typography>
-                    <Box noValidate component={"form"} onSubmit={formik.handleSubmit}>
-                        <Typography variant="body2" mt={3}>
+                    <Box noValidate component={"form"} onSubmit={resetPasswordformik.handleSubmit}>
+                        <Typography variant="body2">
                             Na adres mailowy zostanie wysłany link resetujący hasło
                         </Typography>
-                        <MyTextField name="email" label="Email" formik={formik} />
-                        <Button
+                        <MyTextField name="email" label="Email" formik={resetPasswordformik} />
+                        <LoadingButton
+                            loading={isLoading}
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 1 }}
-                            disabled={!(formik.isValid && formik.dirty)}
+                            disabled={!(resetPasswordformik.isValid && resetPasswordformik.dirty)}
                         >
                             Wyślij
-                        </Button>
+                        </LoadingButton>
                     </Box>
-                </Box>
+                </Stack>
             </Container>
         </>
     );

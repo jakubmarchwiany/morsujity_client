@@ -1,56 +1,32 @@
 import { Password } from "@mui/icons-material";
-import { Avatar, Box, Button, Container, Typography } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import { Avatar, Box, Container, Stack, Typography } from "@mui/material";
 import MyTextField from "components/my/MyTextField";
 import { useFormik } from "formik";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { postFetch } from "utils/fetches";
-import * as Yup from "yup";
-
-const DEV_API_ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT;
-
-const INITIAL_FORM_STATE = {
-    password: "",
-    confirmPassword: "",
-};
-
-const FORM_VALIDATION = Yup.object().shape({
-    password: Yup.string()
-        .required("Wymagane")
-        .min(8, "Hasło za krótkie - co najmniej 8 znaków")
-        .max(20, "Hasło za długie - maksymalnie 20 znaków")
-        .matches(/(?=.*[a-z])/, "Musi zawierać mała literę")
-        .matches(/(?=.*[A-Z])/, "Musi zawierać dużą literę")
-        .matches(/(?=.*[0-9])/, "Musi zawierać cyfrę")
-        .matches(/(?=.*[!@#$%^&*])/, "Musi zawierać znak specjalny (! @ # $ % ^ & *)"),
-    confirmPassword: Yup.string()
-        .required("Wymagane")
-        .oneOf([Yup.ref("password"), null], "Hasła muszą być takie same"),
-});
+import { NEW_PASSWORD_FORM_VALIDATION, NEW_PASSWORD_INITIAL_FORM_STATE } from "utils/formiks";
 
 function NewPassword() {
+    const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
     const { token } = router.query;
 
-    const formik = useFormik({
-        initialValues: INITIAL_FORM_STATE,
-        validationSchema: FORM_VALIDATION,
-        onSubmit: ({ password }) => {
-            postFetch<{ message: string }>(
-                { token, newPassword: password },
-                DEV_API_ENDPOINT + `/auth/new-password`
-            )
-                .then(({ message }) => {
-                    router.push({
-                        pathname: "/login",
-                        query: { open: true, message, type: "success" },
-                    });
+    const newPasswordFormik = useFormik({
+        initialValues: NEW_PASSWORD_INITIAL_FORM_STATE,
+        validationSchema: NEW_PASSWORD_FORM_VALIDATION,
+        onSubmit: ({ newPassword }) => {
+            setIsLoading(true);
+            postFetch<never>({ token, newPassword }, "/auth/new-password", {
+                customError: true,
+            })
+                .then(() => {
+                    router.push("/login");
                 })
-                .catch(({ message }) => {
-                    router.push({
-                        pathname: "/login",
-                        query: { open: true, message, type: "error" },
-                    });
+                .catch(() => {
+                    router.push("/login");
                 });
         },
     });
@@ -67,14 +43,8 @@ function NewPassword() {
                 sx={{
                     px: { xs: 5, sm: 30, md: 15, lg: 30, xl: 40 },
                 }}
-            >
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                    }}
-                >
+            >np
+                <Stack alignItems="center">
                     <Avatar
                         sx={{
                             mb: 2,
@@ -87,36 +57,36 @@ function NewPassword() {
                         <Password fontSize="large" />
                     </Avatar>
 
-                    <Typography component="h1" variant="h4">
+                    <Typography component="h1" variant="h4" mb={1}>
                         Nowe Hasło
                     </Typography>
-                    <Box noValidate component={"form"} onSubmit={formik.handleSubmit}>
+                    <Box noValidate component={"form"} onSubmit={newPasswordFormik.handleSubmit}>
                         <MyTextField
-                            name="password"
+                            name="newPassword"
                             type="password"
                             label="Hasło"
                             autoComplete="new-password"
-                            formik={formik}
+                            formik={newPasswordFormik}
                         />
                         <MyTextField
                             name="confirmPassword"
                             type="password"
                             label="Potwierdzenie Hasła"
                             autoComplete="new-password"
-                            formik={formik}
+                            formik={newPasswordFormik}
                         />
 
-                        <Button
+                        <LoadingButton
+                            loading={isLoading}
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 1 }}
-                            disabled={!(formik.isValid && formik.dirty)}
+                            disabled={!(newPasswordFormik.isValid && newPasswordFormik.dirty)}
                         >
-                            Zmień
-                        </Button>
+                            Nowe Hasło
+                        </LoadingButton>
                     </Box>
-                </Box>
+                </Stack>
             </Container>
         </>
     );

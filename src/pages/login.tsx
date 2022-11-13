@@ -1,65 +1,46 @@
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
-import LoadingButton from "@mui/lab/LoadingButton";
-import { Avatar, Box, Container, Typography } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import { Avatar, Box, Container, Stack, Typography } from "@mui/material";
 import MyLinkButton from "components/my/MyLinkButton";
 import MyTextField from "components/my/MyTextField";
+import { useFormik } from "formik";
 import Cookies from "js-cookie";
-import Notification, { NotificationProps } from "layout/Notification";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { postFetch } from "utils/fetches";
+import { LOGIN_FORM_VALIDATION, LOGIN_INITIAL_FORM_STATE } from "utils/formiks";
+import { sleeper } from "utils/useFull";
 
-const DEV_API_ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT;
+const USER_APP_URL = process.env.NEXT_PUBLIC_USER_APP_URL;
 
 const Login: NextPage = () => {
+    const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
-    const { open, message, type } = router.query;
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [notification, setNotification] = useState<NotificationProps>({
-        open: open === "true" ? true : false,
-        message: message ? message.toString() : "",
-        type: type ? (type.toString() as "success" | "error" | "info" | "warning") : "success",
-    });
 
-    const onSubmit = () => {
-        setLoading(true);
-        postFetch<{ message: string; token: string }>(
-            { email, password },
-            DEV_API_ENDPOINT + `/auth/login`
-        )
-            .then(({ token }) => {
-                Cookies.set("Authorization", token, {
-                    expires: 7,
-                    path: "/",
-                });
-
-                router.push("/user/home");
+    const loginFormik = useFormik({
+        initialValues: LOGIN_INITIAL_FORM_STATE,
+        validationSchema: LOGIN_FORM_VALIDATION,
+        onSubmit: ({ email, password }, { resetForm }) => {
+            setIsLoading(true);
+            postFetch<{ message: string; token: string }>({ email, password }, "/auth/login", {
+                customError: true,
             })
-            .catch(({ message }) => {
-                setLoading(false);
-                setNotification({
-                    open: true,
-                    message: message,
-                    type: "error",
+                .then(async ({ token }) => {
+                    Cookies.set("authorization", token, {
+                        expires: 7,
+                        path: "/",
+                    });
+                    await sleeper(3);
+                    router.push(USER_APP_URL);
+                })
+                .catch(() => {
+                    setIsLoading(false);
+                    resetForm();
                 });
-            });
-    };
-
-    const closeNotification = () => {
-        setNotification({ ...notification, open: false });
-    };
-
-    const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(event.target.value);
-    };
-
-    const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(event.target.value);
-    };
+        },
+    });
 
     return (
         <>
@@ -74,13 +55,7 @@ const Login: NextPage = () => {
                     px: { xs: 5, sm: 30, md: 15, lg: 30, xl: 40 },
                 }}
             >
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                    }}
-                >
+                <Stack alignItems="center">
                     <Avatar
                         sx={{
                             mb: 2,
@@ -93,25 +68,19 @@ const Login: NextPage = () => {
                         <LockOpenOutlinedIcon fontSize="large" />
                     </Avatar>
 
-                    <Typography component="h1" variant="h4">
+                    <Typography component="h1" variant="h4" mb={1}>
                         Zaloguj się
                     </Typography>
-                    <Box component={"form"} noValidate sx={{ mt: 2 }}>
+                    <Box component={"form"} noValidate onSubmit={loginFormik.handleSubmit}>
+                        <MyTextField name="email" label={"Email"} formik={loginFormik} />
                         <MyTextField
-                            name="email"
-                            label="E-mail"
-                            value={email}
-                            onChange={handleEmailChange}
+                            type="password"
+                            name="password"
+                            label={"Hasło"}
+                            autoComplete="password"
+                            formik={loginFormik}
                         />
 
-                        <MyTextField
-                            name="password"
-                            type="password"
-                            label="Hasło"
-                            autoComplete="current-password"
-                            value={password}
-                            onChange={handlePasswordChange}
-                        />
                         <MyLinkButton
                             text="Nie pamiętasz hasła?"
                             href="/auth/reset-password"
@@ -119,16 +88,17 @@ const Login: NextPage = () => {
                             size="small"
                             fullWidth={false}
                         />
+
                         <LoadingButton
-                            loading={loading}
-                            type="button"
-                            onClick={onSubmit}
+                            loading={isLoading}
+                            type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mb: 0.5 }}
+                            disabled={!(loginFormik.isValid && loginFormik.dirty)}
                         >
                             Zaloguj
                         </LoadingButton>
+
                         <MyLinkButton
                             text="Nie masz konta?"
                             href="/register"
@@ -137,14 +107,8 @@ const Login: NextPage = () => {
                             fullWidth={false}
                         />
                     </Box>
-                </Box>
+                </Stack>
             </Container>
-            <Notification
-                open={notification.open}
-                message={notification.message}
-                type={notification.type}
-                close={closeNotification}
-            />
         </>
     );
 };

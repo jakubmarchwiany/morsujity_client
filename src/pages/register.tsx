@@ -1,82 +1,35 @@
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import LoadingButton from "@mui/lab/LoadingButton";
-import { Avatar, Box, Container, Typography } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+import { Avatar, Box, Container, Stack, Typography } from "@mui/material";
 import MyLinkButton from "components/my/MyLinkButton";
 import MyTextField from "components/my/MyTextField";
 import { useFormik } from "formik";
-import Notification, { NotificationProps } from "layout/Notification";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { postFetch } from "utils/fetches";
-import * as Yup from "yup";
-
-const DEV_API_ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT;
-
-const INITIAL_FORM_STATE = {
-    nickname: "",
-    pseudonym: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-};
-
-const FORM_VALIDATION = Yup.object().shape({
-    pseudonym: Yup.string()
-        .required("Wymagane")
-        .min(3, "Ksywka za krótka - Co najmniej 3 znaki")
-        .max(15, "Ksywka za długa - Maksymalnie 15 znaków"),
-    email: Yup.string().required("Wymagane").email("Email niepoprawny"),
-    password: Yup.string()
-        .required("Wymagane")
-        .min(8, "Hasło za krótkie - co najmniej 8 znaków")
-        .max(20, "Hasło za długie - maksymalnie 20 znaków")
-        .matches(/(?=.*[a-z])/, "Musi zawierać mała literę")
-        .matches(/(?=.*[A-Z])/, "Musi zawierać dużą literę")
-        .matches(/(?=.*[0-9])/, "Musi zawierać cyfrę")
-        .matches(/(?=.*[!@#$%^&*])/, "Musi zawierać znak specjalny (! @ # $ % ^ & *)"),
-    confirmPassword: Yup.string()
-        .required("Wymagane")
-        .oneOf([Yup.ref("password"), null], "Hasła muszą być takie same"),
-});
+import { REGISTER_FORM_VALIDATION, REGISTER_INITIAL_FORM_STATE } from "utils/formiks";
+import { sleeper } from "utils/useFull";
 
 const Register: NextPage = () => {
-    const [loading, setLoading] = useState(false);
-    const [notification, setNotification] = useState<NotificationProps>({
-        open: false,
-        message: "",
-        type: "error",
-    });
+    const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
 
-    const closeNotification = () => {
-        setNotification({ ...notification, open: false });
-    };
-
-    const formik = useFormik({
-        initialValues: INITIAL_FORM_STATE,
-        validationSchema: FORM_VALIDATION,
+    const registerFormik = useFormik({
+        initialValues: REGISTER_INITIAL_FORM_STATE,
+        validationSchema: REGISTER_FORM_VALIDATION,
         onSubmit: ({ pseudonym, email, password }) => {
-            setLoading(true);
-            postFetch<{ message: string }>(
-                { pseudonym, email, password },
-                DEV_API_ENDPOINT + "/auth/register"
-            )
-                .then(({ message }) => {
-                    router.push({
-                        pathname: "/login",
-                        query: { open: true, message, type: "success" },
-                    });
+            setIsLoading(true);
+            postFetch<never>({ pseudonym, email, password }, "/auth/register", {
+                customError: true,
+            })
+                .then(async () => {
+                    await sleeper(5);
+                    router.push("/login");
                 })
-
-                .catch(({ message }) => {
-                    setNotification({
-                        open: true,
-                        message: message,
-                        type: "error",
-                    });
-                    setLoading(false);
+                .catch(() => {
+                    setIsLoading(false);
                 });
         },
     });
@@ -97,13 +50,7 @@ const Register: NextPage = () => {
                     px: { xs: 5, sm: 30, md: 15, lg: 30, xl: 40 },
                 }}
             >
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                    }}
-                >
+                <Stack alignItems="center">
                     <Avatar
                         sx={{
                             mb: 2,
@@ -116,47 +63,38 @@ const Register: NextPage = () => {
                         <LockOutlinedIcon fontSize="large" />
                     </Avatar>
 
-                    <Typography component="h1" variant="h4">
+                    <Typography component="h1" variant="h4" mb={1}>
                         Stwórz konto
                     </Typography>
 
-                    <Box
-                        component={"form"}
-                        noValidate
-                        onSubmit={formik.handleSubmit}
-                        sx={{ mt: 2 }}
-                    >
+                    <Box component={"form"} noValidate onSubmit={registerFormik.handleSubmit}>
                         <MyTextField
                             name="pseudonym"
-                            label={"Ksywka (pseudonim, Imię i Nazwisko)"}
-                            formik={formik}
+                            label={"Ksywka [pseudonim, imię i nazwisko]"}
+                            formik={registerFormik}
                         />
-
-                        <MyTextField name="email" label={"Adres email"} formik={formik} />
-
+                        <MyTextField name="email" label={"Email"} formik={registerFormik} />
                         <MyTextField
                             type="password"
                             name="password"
                             label={"Hasło"}
                             autoComplete="new-password"
-                            formik={formik}
+                            formik={registerFormik}
                         />
-
                         <MyTextField
                             type="password"
                             name="confirmPassword"
                             label={"Potwierdzenie Hasła"}
                             autoComplete="new-password"
-                            formik={formik}
+                            formik={registerFormik}
                         />
 
                         <LoadingButton
-                            loading={loading}
+                            loading={isLoading}
                             type="submit"
                             fullWidth
                             variant="contained"
-                            sx={{ mt: 2 }}
-                            disabled={!(formik.isValid && formik.dirty)}
+                            disabled={!(registerFormik.isValid && registerFormik.dirty)}
                         >
                             Rejestruj
                         </LoadingButton>
@@ -168,14 +106,8 @@ const Register: NextPage = () => {
                             fullWidth={false}
                         />
                     </Box>
-                </Box>
+                </Stack>
             </Container>
-            <Notification
-                open={notification.open}
-                message={notification.message}
-                type={notification.type}
-                close={closeNotification}
-            />
         </>
     );
 };

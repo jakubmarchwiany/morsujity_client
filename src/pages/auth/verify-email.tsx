@@ -1,35 +1,30 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 import { postFetch } from "utils/fetches";
-
-const DEV_API_ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT;
+import { sleeper } from "utils/useFull";
 
 function VerifyEmail() {
     const router = useRouter();
     const { token } = router.query;
-
     useEffect(() => {
         if (token) {
-            postFetch<{ message: string }>({ token }, DEV_API_ENDPOINT + "/auth/verify-user-email")
-                .then(({ message }) => {
-                    router.push({
-                        pathname: "/login",
-                        query: { open: true, message, type: "success" },
-                    });
+            postFetch<never>({ token }, "/auth/verify-user-email", {
+                customError: true,
+            })
+                .then(async () => {
+                    await sleeper(5);
+                    router.push("/login");
                 })
-                .catch(({ message }) => {
-                    router.push({
-                        pathname: "/login",
-                        query: { open: true, message, type: "error" },
-                    });
+                .catch(async () => {
+                    await sleeper(5);
+                    router.push("/login");
                 });
         } else {
-            router.push({
-                pathname: "/login",
-                query: { open: true, message: "Brak tokena", type: "error" },
-            });
+            toast.error("Nie znaleziono tokenu");
+            sleeper(5).then(() => router.push("/login"));
         }
-    });
+    }, [token]);
 }
 
 export default VerifyEmail;
