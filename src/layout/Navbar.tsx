@@ -7,9 +7,9 @@ import Box from "@mui/material/Box";
 import MuiLink from "@mui/material/Link";
 import Menu from "@mui/material/Menu";
 import Toolbar from "@mui/material/Toolbar";
+import Navigator from "layout/Navigator";
 import Link from "next/link";
 import { memo, useState } from "react";
-import Navigator from "layout/Navigator";
 
 interface NavbarProps {
     switchMode: () => void;
@@ -48,7 +48,7 @@ function Navbar({ switchMode }: NavbarProps) {
                         }}
                     />
 
-                    <Link href="/user/dashboard" style={{ textDecoration: "none" }}>
+                    <Link href="/" style={{ textDecoration: "none" }}>
                         <MuiLink
                             component="p"
                             variant="h6"
