@@ -20,9 +20,10 @@ import { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useMemo } from "react";
+import { Toaster } from "react-hot-toast";
 import createEmotionCache from "utils/createEmotionCache";
-
-const DEV_API_ENDPOINT = process.env.NEXT_PUBLIC_BACKEND_ENDPOINT;
+import { getFetch } from "utils/fetches";
+import { sleeper } from "utils/useFull";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -30,25 +31,22 @@ interface MyAppProps extends AppProps {
     emotionCache?: EmotionCache;
 }
 
+const USER_APP_URL = process.env.NEXT_PUBLIC_USER_APP_URL;
+
 export default function MyApp(props: MyAppProps) {
     const router = useRouter();
+
     useEffect(() => {
-        const authorization = Cookies.get("Authorization");
-        if (authorization !== undefined) {
-            fetch(DEV_API_ENDPOINT + "/auth/auto-login", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${authorization}`,
-                },
+        if (Cookies.get("authentication") !== undefined) {
+            getFetch<{ message: string }>("/auth/auto-login", {
+                customError: true,
             })
-                .then(async (response) => {
-                    if (response.ok) {
-                        router.push("/user/dashboard");
-                    }
+                .then(() => {
+                    router.push(USER_APP_URL);
                 })
-                .catch((error) => {
-                    console.log(error);
+                .catch(async () => {
+                    await sleeper(3);
+                    router.push("/login");
                 });
         }
     }, []);
@@ -100,6 +98,18 @@ export default function MyApp(props: MyAppProps) {
                     </Grid2>
                     <Footer />
                 </Stack>
+                <Toaster
+                    position="bottom-center"
+                    gutter={10}
+                    containerStyle={{ marginBottom: "40px" }}
+                    toastOptions={{
+                        style: {
+                            maxWidth: "90vw",
+                            background: theme.palette.background.default,
+                            color: theme.palette.text.secondary,
+                        },
+                    }}
+                />
             </ThemeProvider>
         </CacheProvider>
     );
