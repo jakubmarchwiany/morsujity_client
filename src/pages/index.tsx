@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { Container } from "@mui/system";
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -22,17 +22,16 @@ const Home: NextPage = () => {
                     px: { xs: 5, sm: 30, md: 15, lg: 30, xl: 40 },
                 }}
             >
-                <Box textAlign="center">
+                <Stack alignItems="center">
                     <Typography variant="h1">Morsuj i Ty</Typography>
                     <Typography mt={10} mb={5} variant="h5">
                         Witaj w Morsujity! <br />
                         Morsuj dołączaj do grup. <br />
                         Zdobywaj kolejne rangi!
                     </Typography>
-                </Box>
+                </Stack>
             </Container>
         </>
     );
 };
-
 export default Home;
