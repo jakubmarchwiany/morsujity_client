@@ -19,7 +19,7 @@ const Home: NextPage = () => {
             <Container
                 component="main"
                 sx={{
-                    px: { xs: 5, sm: 30, md: 15, lg: 30, xl: 40 },
+                    px: { xs: 5, sm: 10, md: 10, lg: 15, xl: 30 },
                 }}
             >
                 <Stack alignItems="center">
