@@ -31,6 +31,7 @@ const Login: NextPage = () => {
                     Cookies.set("authorization", token, {
                         expires: 7,
                         path: "/",
+                        domain: "morsujity.com",
                     });
                     await sleeper(3);
                     router.push(USER_APP_URL);
