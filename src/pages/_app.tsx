@@ -5,25 +5,21 @@ import {
     Stack,
     ThemeProvider,
     Unstable_Grid2 as Grid2,
-    useMediaQuery,
+    useMediaQuery
 } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import "assets/styles.css";
 import { getDesignTokens } from "assets/theme";
 import useSetMode from "hooks/use-set-mode";
-import Cookies from "js-cookie";
 import Ads from "layout/Ads";
 import Footer from "layout/Footer";
 import Navbar from "layout/Navbar";
 import Navigator from "layout/Navigator";
 import { AppProps } from "next/app";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { Toaster } from "react-hot-toast";
 import createEmotionCache from "utils/createEmotionCache";
-import { getFetch } from "utils/fetches";
-import { sleeper } from "utils/useFull";
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -31,25 +27,7 @@ interface MyAppProps extends AppProps {
     emotionCache?: EmotionCache;
 }
 
-const USER_APP_URL = process.env.NEXT_PUBLIC_USER_APP_URL;
-
 export default function MyApp(props: MyAppProps) {
-    const router = useRouter();
-
-    useEffect(() => {
-        if (Cookies.get("authentication") !== undefined) {
-            getFetch<{ message: string }>("/auth/auto-login", {
-                customError: true,
-            })
-                .then(() => {
-                    router.push(USER_APP_URL);
-                })
-                .catch(async () => {
-                    await sleeper(3);
-                    router.push("/login");
-                });
-        }
-    }, []);
     const [mode, setMode] = useSetMode();
     const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
 
