@@ -43,7 +43,7 @@ function NewPassword() {
                 sx={{
                     px: { xs: 5, sm: 30, md: 15, lg: 30, xl: 40 },
                 }}
-            >np
+            >
                 <Stack alignItems="center">
                     <Avatar
                         sx={{
