@@ -13,16 +13,16 @@ function VerifyEmail() {
                 customError: true,
             })
                 .then(async () => {
-                    await sleeper(5);
+                    await sleeper(2);
                     router.push("/login");
                 })
                 .catch(async () => {
-                    await sleeper(5);
+                    await sleeper(2);
                     router.push("/login");
                 });
         } else {
             toast.error("Nie znaleziono tokenu");
-            sleeper(5).then(() => router.push("/login"));
+            sleeper(2).then(() => router.push("/login"));
         }
     }, [token]);
 }
