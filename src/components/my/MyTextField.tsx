@@ -52,29 +52,22 @@ type MyTextFieldType = {
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const MyTextField = ({
-    type,
-    name,
-    label,
-    placeholder,
-    onChange,
-    autoComplete,
-    value,
-    formik,
-}: MyTextFieldType) => (
-    <StyledTextField
-        type={type !== undefined ? type : "text"}
-        name={name}
-        label={label}
-        placeholder={placeholder !== undefined ? placeholder : undefined}
-        autoComplete={autoComplete !== undefined ? autoComplete : name}
-        fullWidth
-        margin="dense"
-        value={formik ? formik.values[name] : value}
-        onChange={formik ? formik.handleChange : onChange}
-        onBlur={formik && formik.handleBlur}
-        error={formik && formik.touched[name] && Boolean(formik.errors[name])}
-        helperText={formik && formik.touched[name] && formik.errors[name]}
-    />
-);
+const MyTextField = (props: TextFieldProps & MyTextFieldType) => {
+    const { formik } = props;
+
+    return formik ? (
+        <StyledTextField
+            fullWidth
+            variant="filled"
+            value={formik.values[props.name!]}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            error={formik.touched[props.name!] && Boolean(formik.errors[props.name!])}
+            helperText={formik.touched[props.name!] && formik.errors[props.name!]}
+            {...props}
+        />
+    ) : (
+        <StyledTextField fullWidth variant="filled" {...props} />
+    );
+};
 export default MyTextField;
