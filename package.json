@@ -14,29 +14,29 @@
         "start": "next start -p 8080"
     },
     "dependencies": {
-        "@emotion/cache": "^11.10.3",
-        "@emotion/react": "^11.10.4",
-        "@emotion/server": "^11.10.0",
-        "@emotion/styled": "^11.10.4",
-        "@mui/icons-material": "^5.10.6",
-        "@mui/lab": "^5.0.0-alpha.101",
-        "@mui/material": "^5.10.8",
-        "@mui/system": "^5.10.12",
+        "@emotion/cache": "^11.11.0",
+        "@emotion/react": "^11.11.1",
+        "@emotion/server": "^11.11.0",
+        "@emotion/styled": "^11.11.0",
+        "@mui/icons-material": "^5.14.7",
+        "@mui/lab": "^5.0.0-alpha.142",
+        "@mui/material": "^5.14.7",
+        "@mui/system": "^5.14.7",
         "envalid": "^7.3.1",
-        "formik": "^2.2.9",
-        "html-react-parser": "^3.0.4",
-        "js-cookie": "^3.0.1",
-        "next": "^13.0.2",
+        "formik": "^2.4.3",
+        "html-react-parser": "^4.2.2",
+        "js-cookie": "^3.0.5",
+        "next": "^13.4.19",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "react-hot-toast": "^2.4.0",
-        "yup": "^0.32.11"
+        "react-hot-toast": "^2.4.1",
+        "yup": "^1.2.0"
     },
     "devDependencies": {
-        "@types/js-cookie": "^3.0.2",
-        "@types/node": "18.11.9",
-        "@types/react": "18.0.24",
-        "typescript": "4.8.4",
-        "rimraf": "^3.0.2"
+        "@types/js-cookie": "^3.0.3",
+        "@types/node": "20.5.9",
+        "@types/react": "18.2.21",
+        "typescript": "5.2.2",
+        "rimraf": "^5.0.1"
     }
 }
