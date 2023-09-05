@@ -1,5 +1,6 @@
 import { Stack, Typography } from "@mui/material";
 import { Container } from "@mui/system";
+import MyLinkButton from "components/my/MyLinkButton";
 import type { NextPage } from "next";
 import Head from "next/head";
 
@@ -16,19 +17,32 @@ const Home: NextPage = () => {
                 />
                 <link rel="canonical" href="/" />
             </Head>
-            <Container
-                component="main"
-                sx={{
-                    px: { xs: 5, sm: 10, md: 10, lg: 15, xl: 30 },
-                }}
-            >
-                <Stack alignItems="center">
+            <Container component="main">
+                <Stack alignItems="center" mt={{ xs: 3, md: 10 }}>
                     <Typography variant="h1">Morsuj i Ty</Typography>
-                    <Typography mt={10} mb={5} variant="h5">
-                        Witaj w Morsujity! <br />
-                        Morsuj dołączaj do grup. <br />
+                    <Typography mt={{ xs: 5, md: 10 }} mb={3} variant="h5" textAlign={"center"}>
+                        Morsuj
+                        <br />
+                        Zapisuj postępy
+                        <br />
+                        Dołączaj do grup
+                        <br />
                         Zdobywaj kolejne rangi!
                     </Typography>
+                    <MyLinkButton
+                        text="O aplikacji"
+                        href="/blog/1"
+                        isActive={false}
+                        size="large"
+                        fullWidth={false}
+                    />
+                    <MyLinkButton
+                        text="Jak zacząć morsowanie"
+                        href="/blog/2"
+                        isActive={false}
+                        size="large"
+                        fullWidth={false}
+                    />
                 </Stack>
             </Container>
         </>

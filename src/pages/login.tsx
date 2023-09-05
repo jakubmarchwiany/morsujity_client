@@ -1,6 +1,7 @@
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import { LoadingButton } from "@mui/lab";
 import { Avatar, Box, Container, Stack, Typography } from "@mui/material";
+import { standardSize } from "assets/theme";
 import MyLinkButton from "components/my/MyLinkButton";
 import MyTextField from "components/my/MyTextField";
 import { useFormik } from "formik";
@@ -8,10 +9,10 @@ import Cookies from "js-cookie";
 import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { postFetch } from "utils/fetches";
 import { LOGIN_FORM_VALIDATION, LOGIN_INITIAL_FORM_STATE } from "utils/formiks";
-import { sleeper } from "utils/useFull";
+import { sleep } from "utils/useFull";
 
 const USER_APP_URL = process.env.NEXT_PUBLIC_USER_APP_URL;
 
@@ -19,26 +20,40 @@ const Login: NextPage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
 
+    useEffect(() => {
+        if (Cookies.get("authorization") !== undefined) {
+            router.push(USER_APP_URL);
+        }
+    }, []);
+
     const loginFormik = useFormik({
         initialValues: LOGIN_INITIAL_FORM_STATE,
         validationSchema: LOGIN_FORM_VALIDATION,
         onSubmit: ({ email, password }, { resetForm }) => {
             setIsLoading(true);
-            postFetch<{ message: string; token: string }>({ email, password }, "/auth/login", {
+
+            postFetch<{
+                message: string;
+                data: { expires: number; domain: string; token: string };
+            }>({ email, password }, "/auth/login", {
                 customError: true,
             })
-                .then(async ({ token }) => {
+                .then(async ({ data }) => {
+                    const { domain, expires, token } = data;
+
+                    console.log(data);
                     Cookies.set("authorization", token, {
-                        expires: 7,
+                        expires: expires / 24 / 60 / 60,
                         path: "/",
-                        domain: "morsujity.com",
+                        domain: domain,
                     });
-                    await sleeper(3);
+                    await sleep(500);
+
                     router.push(USER_APP_URL);
                 })
                 .catch(() => {
                     setIsLoading(false);
-                    resetForm();
+                    // resetForm();
                 });
         },
     });
@@ -50,13 +65,8 @@ const Login: NextPage = () => {
                 <meta name="description" content="Zaloguj się do swojego konta." />
                 <link rel="canonical" href="/login" />
             </Head>
-            <Container
-                component="main"
-                sx={{
-                    px: { xs: 5, sm: 30, md: 15, lg: 30, xl: 40 },
-                }}
-            >
-                <Stack alignItems="center">
+            <Container component="main" sx={{ display: "flex", justifyContent: "center" }}>
+                <Stack mt={{ xs: 5, md: 10 }} alignItems="center" width={standardSize}>
                     <Avatar
                         sx={{
                             mb: 2,

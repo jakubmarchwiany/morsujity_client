@@ -1,6 +1,7 @@
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { LoadingButton } from "@mui/lab";
 import { Avatar, Box, Container, Stack, Typography } from "@mui/material";
+import { standardSize } from "assets/theme";
 import MyLinkButton from "components/my/MyLinkButton";
 import MyTextField from "components/my/MyTextField";
 import { useFormik } from "formik";
@@ -25,7 +26,7 @@ const Register: NextPage = () => {
                 customError: true,
             })
                 .then(async () => {
-                    await sleeper(5);
+                    await sleeper(3);
                     router.push("/login");
                 })
                 .catch(() => {
@@ -44,13 +45,8 @@ const Register: NextPage = () => {
                 />
                 <link rel="canonical" href="/register" />
             </Head>
-            <Container
-                component="main"
-                sx={{
-                    px: { xs: 5, sm: 30, md: 15, lg: 30, xl: 40 },
-                }}
-            >
-                <Stack alignItems="center">
+            <Container component="main" sx={{ display: "flex", justifyContent: "center" }}>
+                <Stack mt={{ xs: 5, md: 10 }} alignItems="center" width={standardSize}>
                     <Avatar
                         sx={{
                             mb: 2,

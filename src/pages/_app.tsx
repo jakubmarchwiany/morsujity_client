@@ -1,10 +1,10 @@
 import { CacheProvider, EmotionCache } from "@emotion/react";
 import {
-    createTheme,
-    responsiveFontSizes,
+    Unstable_Grid2 as Grid2,
     Stack,
     ThemeProvider,
-    Unstable_Grid2 as Grid2,
+    createTheme,
+    responsiveFontSizes,
     useMediaQuery
 } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,7 +12,6 @@ import "assets/styles.css";
 import { getDesignTokens } from "assets/theme";
 import useSetMode from "hooks/use-set-mode";
 import Ads from "layout/Ads";
-import Footer from "layout/Footer";
 import Navbar from "layout/Navbar";
 import Navigator from "layout/Navigator";
 import { AppProps } from "next/app";
@@ -50,7 +49,7 @@ export default function MyApp(props: MyAppProps) {
                         overflow="auto"
                         columns={20}
                         bgcolor={"background.default"}
-                        color={"text.primary"}
+                        color={"primary.contrastText"}
                     >
                         {isBigScreen && (
                             <Grid2 md={4} lg={3} mt={2}>
@@ -63,7 +62,6 @@ export default function MyApp(props: MyAppProps) {
                             md={12}
                             lg={14}
                             bgcolor={"background.paper"}
-                            py={{ xs: 1, sm: 2, md: 3, lg: 4 }}
                         >
                             <Component {...pageProps} />
                         </Grid2>
@@ -74,7 +72,7 @@ export default function MyApp(props: MyAppProps) {
                             </Grid2>
                         )}
                     </Grid2>
-                    <Footer />
+                    {/* <Footer /> */}
                 </Stack>
                 <Toaster
                     position="bottom-center"
