@@ -24,7 +24,7 @@ export const REGISTER_FORM_VALIDATION = Yup.object().shape({
         .matches(/(?=.*[!@#$%^&*])/, "Musi zawierać znak specjalny (! @ # $ % ^ & *)"),
     confirmPassword: Yup.string()
         .required("Wymagane")
-        .oneOf([Yup.ref("password"), null], "Hasła muszą być takie same"),
+        .oneOf([Yup.ref("password")], "Hasła muszą być takie same"),
 });
 
 export const LOGIN_INITIAL_FORM_STATE = {
@@ -64,5 +64,5 @@ export const NEW_PASSWORD_FORM_VALIDATION = Yup.object().shape({
         .matches(/(?=.*[!@#$%^&*])/, "Musi zawierać znak specjalny (! @ # $ % ^ & *)"),
     confirmPassword: Yup.string()
         .required("Wymagane")
-        .oneOf([Yup.ref("newPassword"), null], "Hasła muszą być takie same"),
+        .oneOf([Yup.ref("newPassword")], "Hasła muszą być takie same"),
 });
