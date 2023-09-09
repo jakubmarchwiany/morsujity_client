@@ -9,6 +9,7 @@ ENGLISH VERSION [HERE](#table-of-contents)
   - [Opis](#opis)
   - [Funkcjonalności](#funkcjonalności)
   - [Technologie](#technologie)
+  - [Wygląd - zrzuty ekranu oraz gify](#wygląd)
   - [Instalacja krok po kroku](#instalacja-krok-po-kroku)
     - [Wymagania wstępne](#wymagania-wstępne)
     - [Instalacja](#instalacja)
@@ -22,7 +23,7 @@ Projekt "Morsujity Client" to strona internetowa, która umożliwia użytkowniko
 ## Funkcjonalności
 
 - rejestracja
-  - walidacja danych - `Formik` + `Yup`
+  - walidacja danych - `Formik` + `Yup` [przykład](#wygląd)
   - w przypadku błędu; odpowiednia wiadomość co zostało wprowadzone niepoprawnie
 - logowanie
   - walidacja danych - `Formik` + `Yup`
@@ -46,6 +47,38 @@ Projekt "Morsujity Client" to strona internetowa, która umożliwia użytkowniko
 | `React`      |             `Yup` |
 | `Typescript` | `React hot toast` |
 | `envalid`    |       `js-cookie` |
+
+## Wygląd
+
+<details>
+<summary>Kliknij mnie</summary>
+
+### Strona główna
+
+<img src="docs/main_page.png" alt="main page">
+
+### Logowanie
+
+<img src="docs/login_page.png" alt="main page">
+
+### Rejestracja
+
+<img src="docs/register_page.png" alt="main page">
+
+### Walidacja
+
+<img src="docs/register.gif" alt="main page" width="50%">
+
+### Potwierdzenie konta
+
+<img src="docs/e-mail.gif" alt="main page" width="70%">
+
+### Blog
+
+<img src="docs/about_page.png" alt="main page">
+<img src="docs/guide_page.png" alt="main page">
+
+</details>
 
 ## Instalacja krok po kroku
 
@@ -84,6 +117,8 @@ następnie, uruchom:
 npm run dev
 ```
 
+# English Version
+
 ## Table of Contents
 
 - [Morsujity Client](#morsujity-client)
@@ -91,6 +126,7 @@ npm run dev
   - [Description](#description)
   - [Features](#features)
   - [Technologies](#technologies)
+  - [Design - screenshot and gifs](#design)
   - [Getting Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
@@ -128,6 +164,38 @@ The "Morsujity Client" project is a website that allows users to create accounts
 | `React`      |             `Yup` |
 | `Typescript` | `React hot toast` |
 | `envalid`    |       `js-cookie` |
+
+## Design
+
+<details>
+<summary>Click me</summary>
+
+### Main Page
+
+<img src="docs/main_page.png" alt="main page">
+
+### Login
+
+<img src="docs/login_page.png" alt="main page">
+
+### Register
+
+<img src="docs/register_page.png" alt="main page">
+
+### Validation
+
+<img src="docs/register.gif" alt="main page" width="50%">
+
+### Account confirm
+
+<img src="docs/e-mail.gif" alt="main page" width="70%">
+
+### Blog
+
+<img src="docs/about_page.png" alt="main page">
+<img src="docs/guide_page.png" alt="main page">
+
+</details>
 
 ## Getting Started
 
