@@ -1,6 +1,7 @@
 import { LockReset } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import { Avatar, Box, Container, Stack, Typography } from "@mui/material";
+import { standardSize } from "assets/theme";
 import MyTextField from "components/my/MyTextField";
 import { useFormik } from "formik";
 import Head from "next/head";
@@ -35,13 +36,8 @@ function ResetPassword() {
                 <meta name="description" content="Resetowanie hasła" />
                 <link rel="canonical" href="/login" />
             </Head>
-            <Container
-                component="main"
-                sx={{
-                    px: { xs: 5, sm: 30, md: 15, lg: 30, xl: 40 },
-                }}
-            >
-                <Stack alignItems="center">
+            <Container component="main" sx={{ display: "flex", justifyContent: "center" }}>
+                <Stack mt={{ xs: 5, md: 10 }} alignItems="center" width={standardSize}>
                     <Avatar
                         sx={{
                             mb: 2,
@@ -57,8 +53,14 @@ function ResetPassword() {
                     <Typography component="h1" variant="h4" mb={1}>
                         Resetowanie Hasła
                     </Typography>
-                    <Box noValidate component={"form"} onSubmit={resetPasswordformik.handleSubmit}>
-                        <Typography variant="body2">
+
+                    <Box
+                        component={"form"}
+                        noValidate
+                        onSubmit={resetPasswordformik.handleSubmit}
+                        width={"100%"}
+                    >
+                        <Typography variant="body2" textAlign={"center"}>
                             Na adres mailowy zostanie wysłany link resetujący hasło
                         </Typography>
                         <MyTextField name="email" label="Email" formik={resetPasswordformik} />

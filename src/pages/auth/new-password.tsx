@@ -1,6 +1,7 @@
 import { Password } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import { Avatar, Box, Container, Stack, Typography } from "@mui/material";
+import { standardSize } from "assets/theme";
 import MyTextField from "components/my/MyTextField";
 import { useFormik } from "formik";
 import Head from "next/head";
@@ -38,13 +39,8 @@ function NewPassword() {
                 <meta name="description" content="Resetowanie hasła" />
                 <link rel="canonical" href="/login" />
             </Head>
-            <Container
-                component="main"
-                sx={{
-                    px: { xs: 5, sm: 30, md: 15, lg: 30, xl: 40 },
-                }}
-            >
-                <Stack alignItems="center">
+            <Container component="main" sx={{ display: "flex", justifyContent: "center" }}>
+                <Stack mt={{ xs: 5, md: 10 }} alignItems="center" width={standardSize}>
                     <Avatar
                         sx={{
                             mb: 2,
