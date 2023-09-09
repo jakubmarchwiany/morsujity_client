@@ -67,6 +67,15 @@ export const getDesignTokens = (mode: PaletteMode) => ({
             xl: 1408,
         },
     },
+    components: {
+        MuiCssBaseline: {
+            styleOverrides: {
+                body: {
+                    backgroundColor: (mode === "light" ? "#468faf" : "#2c5a69"),
+                },
+            },
+        },
+    },
 });
 
 export const standardSize = { xs: "95%", sm: "85%", md: "70%", lg: "55%", xl: "40%" };
