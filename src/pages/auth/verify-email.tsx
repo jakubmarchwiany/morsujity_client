@@ -7,24 +7,27 @@ import { sleeper } from "utils/useFull";
 function VerifyEmail() {
     const router = useRouter();
     const { token } = router.query;
+
     useEffect(() => {
-        if (token) {
-            postFetch<never>({ token }, "/auth/verify-user-email", {
-                customError: true,
-            })
-                .then(async () => {
-                    await sleeper(2);
-                    router.push("/login");
+        if (router.isReady) {
+            if (token) {
+                postFetch<never>({ token }, "/auth/verify-user-email", {
+                    customError: true,
                 })
-                .catch(async () => {
-                    await sleeper(2);
-                    router.push("/login");
-                });
-        } else {
-            toast.error("Nie znaleziono tokenu");
-            sleeper(2).then(() => router.push("/login"));
+                    .then(async () => {
+                        await sleeper(2);
+                        router.push("/login");
+                    })
+                    .catch(async () => {
+                        await sleeper(2);
+                        router.push("/login");
+                    });
+            } else {
+                toast.error("Nie znaleziono tokenu");
+                sleeper(2).then(() => router.push("/login"));
+            }
         }
-    }, [token]);
+    }, [router]);
 }
 
 export default VerifyEmail;
