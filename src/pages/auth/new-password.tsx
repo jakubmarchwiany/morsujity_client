@@ -20,7 +20,7 @@ function NewPassword() {
         validationSchema: NEW_PASSWORD_FORM_VALIDATION,
         onSubmit: ({ newPassword }) => {
             setIsLoading(true);
-            postFetch<never>({ token, newPassword }, "/auth/new-password", {
+            postFetch<never>({ token, newPassword }, "/auth/password/new", {
                 customError: true,
             })
                 .then(() => {
