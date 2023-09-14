@@ -19,7 +19,7 @@ function ResetPassword() {
         validationSchema: RESET_PASSWORD_FORM_VALIDATION,
         onSubmit: ({ email }) => {
             setIsLoading(true);
-            postFetch<never>({ email }, "/auth/password/reset", { customError: true })
+            postFetch<never>({ email }, "/auth/password/reset-email", { customError: true })
                 .then(() => {
                     router.push("/login");
                 })
